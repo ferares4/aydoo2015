@@ -1,5 +1,6 @@
 package ejemplo1.test.fiuba.algo3.ejemplo1;
 //import junit.framework.Assert;
+import ejemplo1.src.fiuba.algo3.ejemplo1.Foo;
 import org.junit.Test;
 import org.junit.Assert;
 
