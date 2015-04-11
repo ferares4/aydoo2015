@@ -7,7 +7,8 @@ public class FooTest {
 
 	@Test
 	public void doFooShouldReturnFoo(){
-        Foo foo = new Foo();
+        Foo foo;
+        foo = new Foo();
         String result = foo.doFoo();
         Assert.assertEquals("Foo", result);
 

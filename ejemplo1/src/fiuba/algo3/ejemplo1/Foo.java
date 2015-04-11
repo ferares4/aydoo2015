@@ -10,7 +10,7 @@ public class Foo {
 		
 	}
 	
-	String doFoo(){
+	public String doFoo(){
 		
 		return mensaje;
 		
