@@ -6,7 +6,7 @@ public class Foo {
 	
 	public Foo(){
 		
-		mensaje = "FOO";
+		mensaje = "Foo";
 		
 	}
 	
