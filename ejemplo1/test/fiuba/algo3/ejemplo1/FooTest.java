@@ -1,6 +1,5 @@
 package fiuba.algo3.ejemplo1;
-import org.junit.Assert;
-//import junit.framework.Assert;
+import junit.framework.Assert;
 import org.junit.Test;
 
 public class FooTest {
