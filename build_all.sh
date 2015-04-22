@@ -1,4 +1,4 @@
 #!/usr/bin/env sh
 set -e
-cd ejemplo1
+cd Trabajo Practico N1
 ant
