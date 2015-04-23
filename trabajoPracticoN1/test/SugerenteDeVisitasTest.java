@@ -45,7 +45,7 @@ public class SugerenteDeVisitasTest {
 		Assert.assertFalse(listaDeAtracciones.isEmpty());
 		
 		Iterator<Atraccion> iteradorDeLista = listaDeAtracciones.iterator();
-		Assert.assertFalse(iteradorDeLista.hasNext());		
+		Assert.assertTrue(iteradorDeLista.hasNext());		
 		
 	
 		while (iteradorDeLista.hasNext()){
