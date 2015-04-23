@@ -1,11 +1,13 @@
 
+//enum tiposDeAtracciones {Museo, ParqueDeDiversiones};
+
 public class Atraccion {
 	
 	private int coordenadaX;
 	private int coordenadaY;
 	private double costo;
 	private int cupoDeIntegrantesDiarios;
-	private int tiempoNecesarioParaVisita;
+	private int tiempoNecesarioParaVisitaEnMinutos;
 	private String tipo;
 	
 	public int getCoordenadaX() {
@@ -32,19 +34,18 @@ public class Atraccion {
 	public void setCupoDeIntegrantesDiarios(int cupoDeIntegrantesDiarios) {
 		this.cupoDeIntegrantesDiarios = cupoDeIntegrantesDiarios;
 	}
-	public int getTiempoNecesarioParaVisita() {
-		return tiempoNecesarioParaVisita;
+	public int getTiempoNecesarioParaVisitaEnMinutos() {
+		return tiempoNecesarioParaVisitaEnMinutos;
 	}
-	public void setTiempoNecesarioParaVisita(int tiempoNecesarioParaVisita) {
-		this.tiempoNecesarioParaVisita = tiempoNecesarioParaVisita;
+	public void setTiempoNecesarioParaVisitaEnMinutos(int tiempoNecesarioParaVisitaEnMinutos) {
+		this.tiempoNecesarioParaVisitaEnMinutos = tiempoNecesarioParaVisitaEnMinutos;
 	}
 	public String getTipo() {
 		return tipo;
 	}
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setTipo(String tipoAtraccion) {
+		this.tipo = tipoAtraccion;
 	}
 	
 	
-
 }
