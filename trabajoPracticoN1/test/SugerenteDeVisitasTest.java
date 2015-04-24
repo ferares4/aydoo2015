@@ -91,8 +91,17 @@ public class SugerenteDeVisitasTest {
 		Promocion promocion1 = new Promocion(tipoDePromocion.PROMOCION_PORCENTUAL, 10);
 		promocion1.setAtracciones(vectorDeAtracciones[1]);
 		
-		SugerenteDeVisitas miSugerente = new SugerenteDeVisitas(miUsuario,vectorDeAtracciones,null);
+		//Configuracion del sugerente de visitas
+		Promocion[] vectorDePromocionesParaSugerenteDeVisitas = new Promocion[]{promocion1};
+		SugerenteDeVisitas miSugerente = new SugerenteDeVisitas(miUsuario,vectorDeAtracciones,vectorDePromocionesParaSugerenteDeVisitas);
+				
+		Assert.assertEquals(promocion1, miSugerente.buscarAtraccionEnPromocionesVigentes(vectorDeAtracciones[1]));
+		Assert.assertEquals(null, vectorDeAtracciones[1].getPromocionesAplicables());
+		
 		miSugerente.sugerirVisita();
+		Assert.assertTrue(vectorDeAtracciones[1].getPromocionesAplicables().contains(promocion1));
+		
+		
 		
 		
 		

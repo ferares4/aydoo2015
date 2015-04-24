@@ -22,6 +22,7 @@ public class SugerenteDeVisitas {
 
 	public List<Atraccion> sugerirVisita(){
 		
+		Promocion promocionAplicable;
 			
 		List<Atraccion> listaDeAtraccionesParaUsuario = new LinkedList<Atraccion>();
 		
@@ -29,7 +30,17 @@ public class SugerenteDeVisitas {
 			
 			if (atraccionSugeridaParaUsuario(usuario,vectorDeAtracciones[i])){
 				
-				listaDeAtraccionesParaUsuario.add(vectorDeAtracciones[i]);
+					if (buscarAtraccionEnPromocionesVigentes(vectorDeAtracciones[i])!=null){
+				
+						vectorDeAtracciones[i].addPromocionAplicable(buscarAtraccionEnPromocionesVigentes(vectorDeAtracciones[i]));	
+						listaDeAtraccionesParaUsuario.add(vectorDeAtracciones[i]);
+					}
+						
+					else {
+							
+							listaDeAtraccionesParaUsuario.add(vectorDeAtracciones[i]);
+						
+					}
 				
 			}
 			
@@ -54,7 +65,8 @@ public class SugerenteDeVisitas {
 		
 		
 					{
-			
+						
+						
 						return true;
 			
 					}
@@ -83,67 +95,33 @@ public class SugerenteDeVisitas {
 	}
 	
 	
-	/*
-	public boolean validarPromocionesVigentes(){
+	public Promocion buscarAtraccionEnPromocionesVigentes(Atraccion atraccion){
 		
-		return !(vectorDePromociones == null);
-				
-	}
-	
-	
-	public void aplicarPromocion(Atraccion atraccion){
-		
-		switch (nombre){
-		
-		// 10% de descuento sobre el costo de la atraccion
-		case "Promocion Porcentual": paqueteFinal.setCostoTotal((atraccion.getCosto()*90)/100);
-		break;
+		if (vectorDePromociones != null){
 			
-		default: return paqueteFinal;
-		
-		
-		}
-		
-
+			for(int i=0;i<vectorDePromociones.length;i++){
 				
-	}
-		
-	
-	public void aplicarPromocion(Atraccion [] atracciones){
-			
-			switch (nombre){
-			
-			// 20% de descuento sobre el costo total de todas las atracciones
-			case "Promocion por Paquete": 
-				
-				for (int i=0; i<atracciones.length;i++){
+				if (vectorDePromociones[i].getListaDeAtracciones().contains(atraccion)){
 					
-					paqueteFinal.setCostoTotal(paqueteFinal.getCostoTotal()+atracciones[i].getCosto());
-				
+					return vectorDePromociones[i];
+					
 				}
 				
-				paqueteFinal.setCostoTotal((paqueteFinal.getCostoTotal()*80)/100);
-			
-			break;
-			
-			// Si el numero de atracciones a contratar es mayor a 4 entonces reintegra la mas barata
-			case "Promocion A x B":
+				else {
+					
+					i++;
+					
+				}
 				
-				//implementar
-				
-				
-			break;
+			}
 			
 			
-			default: return paqueteFinal;
 			
-			
-			}		
+		}
 		
 		
-		
+		return null;
 	}
-	*/
 	
 	
 }

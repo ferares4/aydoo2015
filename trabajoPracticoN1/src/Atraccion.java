@@ -1,3 +1,6 @@
+import java.util.LinkedList;
+import java.util.List;
+
 
 //enum tiposDeAtracciones {Museo, ParqueDeDiversiones};
 
@@ -9,7 +12,9 @@ public class Atraccion {
 	private int cupoDeIntegrantesDiarios;
 	private int tiempoNecesarioParaVisitaEnMinutos;
 	private String tipo;
+	private List<Promocion> promocionesAplicables = null;
 	
+
 	public Atraccion(){}
 	
 	public int getCoordenadaX() {
@@ -49,5 +54,21 @@ public class Atraccion {
 		this.tipo = tipoAtraccion;
 	}
 	
+	public List<Promocion> getPromocionesAplicables() {
+		return promocionesAplicables;
+	}
+	
+	public void addPromocionAplicable(Promocion promocion){
+		
+		promocionesAplicables = new LinkedList<Promocion>();
+		this.promocionesAplicables.add(promocion);
+		
+	} 
+
+	public void setPromocionesAplicables(List<Promocion> promocionesAplicables) {
+		
+		promocionesAplicables = new LinkedList<Promocion>();
+		this.promocionesAplicables = promocionesAplicables;
+	}
 	
 }
