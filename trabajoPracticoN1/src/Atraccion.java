@@ -10,6 +10,8 @@ public class Atraccion {
 	private int tiempoNecesarioParaVisitaEnMinutos;
 	private String tipo;
 	
+	public Atraccion(){}
+	
 	public int getCoordenadaX() {
 		return coordenadaX;
 	}

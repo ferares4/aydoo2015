@@ -14,7 +14,7 @@ public class AtraccionTest {
 		miAtraccion.setTiempoNecesarioParaVisitaEnMinutos(8);
 		miAtraccion.setCupoDeIntegrantesDiarios(400);
 		miAtraccion.setTipo("Paisaje de Aventura");
-		
+				
 		Assert.assertEquals(192, miAtraccion.getCoordenadaX());
 		Assert.assertEquals(192, miAtraccion.getCoordenadaY());
 		Assert.assertEquals(10,0, miAtraccion.getCosto());
