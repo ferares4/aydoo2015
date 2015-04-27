@@ -4,13 +4,13 @@ import java.util.List;
 
 //enum tiposDeAtracciones {Museo, ParqueDeDiversiones};
 
-public class Atraccion {
+public class Atraccion{
 	
 	private int coordenadaX;
 	private int coordenadaY;
 	private double costo;
 	private int cupoDeIntegrantesDiarios;
-	private int tiempoNecesarioParaVisitaEnMinutos;
+	private int tiempoNecesarioParaVisita;
 	private String tipo;
 	private List<Promocion> promocionesAplicables = null;
 	
@@ -41,11 +41,11 @@ public class Atraccion {
 	public void setCupoDeIntegrantesDiarios(int cupoDeIntegrantesDiarios) {
 		this.cupoDeIntegrantesDiarios = cupoDeIntegrantesDiarios;
 	}
-	public int getTiempoNecesarioParaVisitaEnMinutos() {
-		return tiempoNecesarioParaVisitaEnMinutos;
+	public int getTiempoNecesarioParaVisita() {
+		return tiempoNecesarioParaVisita;
 	}
-	public void setTiempoNecesarioParaVisitaEnMinutos(int tiempoNecesarioParaVisitaEnMinutos) {
-		this.tiempoNecesarioParaVisitaEnMinutos = tiempoNecesarioParaVisitaEnMinutos;
+	public void setTiempoNecesarioParaVisita(int tiempoNecesarioParaVisita) {
+		this.tiempoNecesarioParaVisita = tiempoNecesarioParaVisita;
 	}
 	public String getTipo() {
 		return tipo;

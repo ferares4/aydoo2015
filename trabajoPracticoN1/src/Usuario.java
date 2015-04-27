@@ -1,18 +1,8 @@
-/*
- * 
- *  
- * 
- * 
- * 
- * 
- * 
- * 
- */
 
 public class Usuario {
 	
 	private double presupuesto;
-	private int tiempoDisponibleParaVisitasEnMinutos;
+	private int tiempoDisponibleParaVisitas;
 	private int velocidadDeTraslado;
 	private String tipoDeAtraccionPreferida;
 	
@@ -25,12 +15,12 @@ public class Usuario {
 		this.presupuesto = presupuesto;
 	}
 
-	public int getTiempoDisponibleParaVisitasEnMinutos() {
-		return tiempoDisponibleParaVisitasEnMinutos;
+	public int getTiempoDisponibleParaVisitas() {
+		return tiempoDisponibleParaVisitas;
 	}
 
-	public void setTiempoDisponibleParaVisitasEnMinutos(int tiempoDisponibleParaVisitasEnMinutos) {
-		this.tiempoDisponibleParaVisitasEnMinutos = tiempoDisponibleParaVisitasEnMinutos;
+	public void setTiempoDisponibleParaVisitas(int tiempoDisponibleParaVisitas) {
+		this.tiempoDisponibleParaVisitas = tiempoDisponibleParaVisitas;
 	}
 
 	public int getVelocidadDeTraslado() {
