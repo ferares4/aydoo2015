@@ -1,8 +1,3 @@
-import java.util.LinkedList;
-import java.util.List;
-
-
-//enum tiposDeAtracciones {Museo, ParqueDeDiversiones};
 
 public class Atraccion{
 	
@@ -13,8 +8,9 @@ public class Atraccion{
 	private int tiempoNecesarioParaVisita;
 	private String tipo;
 	
-
 	public Atraccion(){}
+	
+	// Getters & Setters
 	
 	public int getCoordenadaX() {
 		return coordenadaX;
@@ -52,6 +48,25 @@ public class Atraccion{
 	public void setTipo(String tipoAtraccion) {
 		this.tipo = tipoAtraccion;
 	}
-	
-	//public void aplicarDescuento()
+		
+	//To DELETE
+	/*
+	public List<Promocion> buscarPromocionesVigentes(Promocion[] vectorDePromociones){
+		
+		List <Promocion> promocionesVigentes = new LinkedList<Promocion>();
+		
+		for (int i=0;i<vectorDePromociones.length;i++){
+			
+			if (vectorDePromociones[i].tienePromocion(this)){
+				
+				promocionesVigentes.add(vectorDePromociones[i]);
+				
+			}
+			
+		}
+		
+		return promocionesVigentes;		
+		
+	}
+	*/
 }

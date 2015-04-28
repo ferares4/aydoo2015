@@ -10,6 +10,52 @@ public class Usuario {
 	private String tipoDeAtraccionPreferida;
 	
 	
+	public int calcularTiempoDeViaje(int xInicial, int yInicial, int xfinal, int yFinal){
+
+		return (int) Math.round((Math.sqrt((Math.pow(xfinal-xInicial,2)+Math.pow((yFinal-yInicial), 2)))/velocidadDeTraslado));
+
+	}
+	
+	/*Devuelve la atraccion mas cercana de acuerdo a la posicion actual*/
+	public Atraccion buscarAtraccionMasCercana(int x, int y, List<Atraccion> listaDeAtracciones){
+
+		int tiempoDeLlegada;
+		Iterator<Atraccion> iterador = listaDeAtracciones.iterator();
+		Atraccion atraccionTemporal=null;
+
+		while(iterador.hasNext()){
+
+			atraccionTemporal = iterador.next();	
+			tiempoDeLlegada = this.calcularTiempoDeViaje(x, y, atraccionTemporal.getCoordenadaX(), atraccionTemporal.getCoordenadaY());
+
+			while(iterador.hasNext()){
+
+				Atraccion atraccionTemporal2 = iterador.next();	
+				if (tiempoDeLlegada < this.calcularTiempoDeViaje(x, y, atraccionTemporal2.getCoordenadaX(), atraccionTemporal2.getCoordenadaY())){
+
+
+
+				}
+
+				else{
+
+					tiempoDeLlegada = this.calcularTiempoDeViaje(x, y, atraccionTemporal2.getCoordenadaX(), atraccionTemporal2.getCoordenadaY());
+					atraccionTemporal = atraccionTemporal2;
+
+				}
+
+			}
+
+
+		}
+
+		return atraccionTemporal;
+
+	}
+	
+	// Getters & Setters
+	
+	
 	public double getPresupuesto() {
 		return presupuesto;
 	}
@@ -40,49 +86,6 @@ public class Usuario {
 
 	public void setTipoDeAtraccionPreferida(String tipoDeAtraccionPreferida) {
 		this.tipoDeAtraccionPreferida = tipoDeAtraccionPreferida;
-	}
-	
-	public int calcularTiempoDeViaje(int xInicial, int yInicial, int xfinal, int yFinal){
-		
-		
-		return (int) Math.round((Math.sqrt((Math.pow(xfinal-xInicial,2)+Math.pow((yFinal-yInicial), 2)))/velocidadDeTraslado));
-		
-	}
-	
-	public Atraccion buscarAtraccionMasCercana(int x, int y, List<Atraccion> listaDeAtracciones){
-		
-		int tiempoDeLlegada;
-		Iterator<Atraccion> iterador = listaDeAtracciones.iterator();
-		Atraccion atraccionTemporal=null;
-				
-		while(iterador.hasNext()){
-			
-		atraccionTemporal = iterador.next();	
-		tiempoDeLlegada = this.calcularTiempoDeViaje(x, y, atraccionTemporal.getCoordenadaX(), atraccionTemporal.getCoordenadaY());
-			
-			while(iterador.hasNext()){
-		
-				Atraccion atraccionTemporal2 = iterador.next();	
-				if (tiempoDeLlegada < this.calcularTiempoDeViaje(x, y, atraccionTemporal2.getCoordenadaX(), atraccionTemporal2.getCoordenadaY())){
-					
-					
-					
-				}
-				
-				else{
-					
-					tiempoDeLlegada = this.calcularTiempoDeViaje(x, y, atraccionTemporal2.getCoordenadaX(), atraccionTemporal2.getCoordenadaY());
-					atraccionTemporal = atraccionTemporal2;
-					
-				}
-		
-			}
-		
-		
-		}
-		
-		return atraccionTemporal;
-		
 	}
 
 }

@@ -17,7 +17,22 @@ public class Promocion {
 		listaDeAtracciones = new LinkedList<Atraccion>();
 		
 	}
-
+	
+	public void addAtraccion(Atraccion atraccion) {
+		
+		listaDeAtracciones.add(atraccion);			
+		
+    }
+	
+	public boolean tienePromocion(Atraccion atraccion){
+		
+		return listaDeAtracciones.contains(atraccion);
+		
+	}
+		
+	
+	// Getters & Setters 
+	
 	public tipoDePromocion getTipo() {
 		return tipo;
 	}
@@ -34,12 +49,6 @@ public class Promocion {
 		this.periodoDeVigenciaEnDias = periodoDeVigenciaEnDias;
 	}
 
-	public void addAtraccion(Atraccion atraccion) {
-		
-			listaDeAtracciones.add(atraccion);			
-			
-	}
-		
 	public List<Atraccion> getListaDeAtracciones() {
 		return listaDeAtracciones;
 	}
@@ -48,20 +57,5 @@ public class Promocion {
 		this.listaDeAtracciones = listaDeAtracciones;
 	}
 	
-	public boolean tienePromocion(Atraccion atraccion){
-		
-		return listaDeAtracciones.contains(atraccion);
-		
-	}
-		
-	public void aplicarPromocion(tipoDePromocion tipo){
-		
-		switch (tipo){
-		
-		case PROMOCION_PORCENTUAL:
-			
-	
-		
-		}
-	}
+
 }
