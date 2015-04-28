@@ -18,7 +18,7 @@ public class Promocion {
 		
 	}
 
-	public tipoDePromocion getNombre() {
+	public tipoDePromocion getTipo() {
 		return tipo;
 	}
 
@@ -34,22 +34,12 @@ public class Promocion {
 		this.periodoDeVigenciaEnDias = periodoDeVigenciaEnDias;
 	}
 
-	public void setAtracciones(Atraccion atraccion) {
+	public void addAtraccion(Atraccion atraccion) {
 		
 			listaDeAtracciones.add(atraccion);			
 			
 	}
 		
-		
-	public void setAtracciones(Atraccion[] vectorDeAtracciones) {
-		
-		for (int i=0;i<vectorDeAtracciones.length;i++){
-		
-			listaDeAtracciones.add(vectorDeAtracciones[i]);
-			
-		}
-	}
-
 	public List<Atraccion> getListaDeAtracciones() {
 		return listaDeAtracciones;
 	}
@@ -57,11 +47,21 @@ public class Promocion {
 	public void setListaDeAtracciones(List<Atraccion> listaDeAtracciones) {
 		this.listaDeAtracciones = listaDeAtracciones;
 	}
-
-	public tipoDePromocion getTipo() {
-		return tipo;
+	
+	public boolean tienePromocion(Atraccion atraccion){
+		
+		return listaDeAtracciones.contains(atraccion);
+		
 	}
+		
+	public void aplicarPromocion(tipoDePromocion tipo){
+		
+		switch (tipo){
+		
+		case PROMOCION_PORCENTUAL:
+			
 	
 		
-
+		}
+	}
 }

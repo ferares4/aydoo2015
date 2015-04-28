@@ -30,7 +30,7 @@ public class SugerenteDeVisitas {
 				atraccion.getTipo() != null	
 				&& usuario.getTipoDeAtraccionPreferida().equals(atraccion.getTipo())
 				&& usuario.getPresupuesto() > atraccion.getCosto()	
-				&& usuario.getTiempoDisponibleParaVisitas() > atraccion.getTiempoNecesarioParaVisita()
+				&& usuario.getTiempoDisponibleParaVisitas() > atraccion.getTiempoNecesarioParaVisita()+usuario.calcularTiempoDeViaje(0, 0, atraccion.getCoordenadaX(), atraccion.getCoordenadaY())
 	
 			) 
 
@@ -71,19 +71,13 @@ public class SugerenteDeVisitas {
 		
 		for (int i=0;i<vectorDeAtracciones.length;i++){
 			
+			// Tiene Promocion()?? Cual??? Aplicar descuento: vectorDeAtracciones[i].setCosto(vectorDeAtracciones[i].getCosto()*  PORCENTAJE)
+			
 			if (atraccionSugeridaParaUsuario(usuario,vectorDeAtracciones[i])){
 				
-					if (buscarAtraccionEnPromocionesVigentes(vectorDeAtracciones[i])!=null){
-				
-						vectorDeAtracciones[i].addPromocionAplicable(buscarAtraccionEnPromocionesVigentes(vectorDeAtracciones[i]));	
-						listaDeAtraccionesParaUsuario.add(vectorDeAtracciones[i]);
-					}
-						
-					else {
-							
+
 							listaDeAtraccionesParaUsuario.add(vectorDeAtracciones[i]);
-						
-					}
+
 				
 			}
 			
@@ -142,9 +136,12 @@ public class SugerenteDeVisitas {
 			atraccionTemporal=iteradorDeAtracciones.next();
 			
 						
-			if(		(atraccionTemporal.getTipo().equals(miUsuario.getTipoDeAtraccionPreferida())
-				&&  (presupuestoDisponible>=atraccionTemporal.getCosto()))
-			  ) {
+			if(		atraccionTemporal.getTipo().equals(miUsuario.getTipoDeAtraccionPreferida())
+				&&  presupuestoDisponible>=atraccionTemporal.getCosto()
+			  ) 
+			
+			{
+				
 				
 				presupuestoDisponible -= atraccionTemporal.getCosto();
 				listaDeAtraccionesEnItinerario.add(atraccionTemporal);
@@ -175,6 +172,56 @@ public class SugerenteDeVisitas {
 		
 	}	
 	
+	
+	public List<Atraccion> sugerirItinerarioPorMenorDistancia(Usuario miUsuario) {
+		
+		double presupuesto = miUsuario.getPresupuesto();
+		int tiempoDisponible = miUsuario.getTiempoDisponibleParaVisitas();
+		int coordenadaActualX=0;
+		int coordenadaActualY=0;
+		List<Atraccion> listaDeAtraccionesDisponibles = this.sugerirVisita(miUsuario);
+		List<Atraccion> listaDeAtraccionesParaItinerario = new LinkedList<Atraccion>();
+		Atraccion atraccionTemporal = miUsuario.buscarAtraccionMasCercana(coordenadaActualX, coordenadaActualY, listaDeAtraccionesDisponibles);
+		Atraccion atraccionTemporal2 = new Atraccion();
+	
+		while (		presupuesto >= miUsuario.buscarAtraccionMasCercana(coordenadaActualX, coordenadaActualY, listaDeAtraccionesDisponibles).getCosto() 
+				&&  tiempoDisponible >= (miUsuario.calcularTiempoDeViaje(coordenadaActualX, coordenadaActualY, atraccionTemporal.getCoordenadaX(), atraccionTemporal.getCoordenadaY()))+atraccionTemporal.getTiempoNecesarioParaVisita()
+			    
+		      )
+		{
+		
+				atraccionTemporal2 = miUsuario.buscarAtraccionMasCercana(coordenadaActualX, coordenadaActualY, listaDeAtraccionesDisponibles);
+				tiempoDisponible -= miUsuario.calcularTiempoDeViaje(coordenadaActualX, coordenadaActualY, atraccionTemporal2.getCoordenadaX(), atraccionTemporal2.getCoordenadaY())+atraccionTemporal.getTiempoNecesarioParaVisita();
+				presupuesto -= atraccionTemporal2.getCosto();
+				coordenadaActualX = atraccionTemporal2.getCoordenadaX();
+				coordenadaActualY = atraccionTemporal2.getCoordenadaY();
+				listaDeAtraccionesParaItinerario.add(atraccionTemporal2);
+				listaDeAtraccionesDisponibles.remove(listaDeAtraccionesDisponibles.indexOf(atraccionTemporal2));
+						
+		}	
+		
+		return listaDeAtraccionesParaItinerario;
+			
+	}
+		
+		
+
+	
+	public List<Atraccion> ordenarListaPorCosto(List <Atraccion> miLista){
+		
+		Collections.sort(miLista, new AtraccionComparator(Atributos.COSTO));
+		return miLista;
+		
+	}
+	
+	public List<Atraccion> ordenarListaPorTiempo(List <Atraccion> miLista){
+		
+		Collections.sort(miLista, new AtraccionComparator(Atributos.TIEMPO));
+		return miLista;
+		
+	}
+	 	
+	/*
 	public List<Atraccion> sugerirItinerarioPorTiempo(Usuario miUsuario){
 		
 		int tiempoDisponible = miUsuario.getTiempoDisponibleParaVisitas();
@@ -223,20 +270,22 @@ public class SugerenteDeVisitas {
 		
 	}
 	
-	public List<Atraccion> ordenarListaPorCosto(List <Atraccion> miLista){
+	
+	public tipoDePromocion validarPromociones(Atraccion atraccion){
 		
-		Collections.sort(miLista, new AtraccionComparator(Atributos.COSTO));
-		return miLista;
+		for (int i=0;i<vectorDePromociones.length;i++){
+			
+			if (vectorDePromociones[i].tienePromocion(atraccion)){
+				
+				return vectorDePromociones[i].getTipo();
+				
+			}
+			
+		}
 		
 	}
 	
-	public List<Atraccion> ordenarListaPorTiempo(List <Atraccion> miLista){
-		
-		Collections.sort(miLista, new AtraccionComparator(Atributos.TIEMPO));
-		return miLista;
-		
-	}
-	 	
-	 
+	*/
+	
 	
 }
