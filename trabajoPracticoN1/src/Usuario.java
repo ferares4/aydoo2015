@@ -8,15 +8,23 @@ public class Usuario {
 	private int tiempoDisponibleParaVisitas;
 	private int velocidadDeTraslado;
 	private String tipoDeAtraccionPreferida;
+	private int direccionX;
+	private int direccionY;
 	
-	
+	/** Calcula un tiempo de viaje teniendo en cuenta la velocidad de traslado entre 2 coordenadas genericas */
 	public int calcularTiempoDeViaje(int xInicial, int yInicial, int xfinal, int yFinal){
 
 		return (int) Math.round((Math.sqrt((Math.pow(xfinal-xInicial,2)+Math.pow((yFinal-yInicial), 2)))/velocidadDeTraslado));
 
 	}
+
+	/** Calcula la distancia entre 2 coordenadas genericas */
+	public int calcularDistanciaDeViaje(int xInicial, int yInicial, int xfinal, int yFinal){
+		
+		return (int) Math.round((Math.sqrt((Math.pow(xfinal-xInicial,2)+Math.pow((yFinal-yInicial), 2)))));
+	}
 	
-	/*Devuelve la atraccion mas cercana de acuerdo a la posicion actual*/
+	/** Devuelve la atraccion mas cercana de acuerdo a la posicion actual */
 	public Atraccion buscarAtraccionMasCercana(int x, int y, List<Atraccion> listaDeAtracciones){
 
 		int tiempoDeLlegada;
@@ -31,13 +39,7 @@ public class Usuario {
 			while(iterador.hasNext()){
 
 				Atraccion atraccionTemporal2 = iterador.next();	
-				if (tiempoDeLlegada < this.calcularTiempoDeViaje(x, y, atraccionTemporal2.getCoordenadaX(), atraccionTemporal2.getCoordenadaY())){
-
-
-
-				}
-
-				else{
+				if (tiempoDeLlegada >= this.calcularTiempoDeViaje(x, y, atraccionTemporal2.getCoordenadaX(), atraccionTemporal2.getCoordenadaY())){
 
 					tiempoDeLlegada = this.calcularTiempoDeViaje(x, y, atraccionTemporal2.getCoordenadaX(), atraccionTemporal2.getCoordenadaY());
 					atraccionTemporal = atraccionTemporal2;
@@ -86,6 +88,22 @@ public class Usuario {
 
 	public void setTipoDeAtraccionPreferida(String tipoDeAtraccionPreferida) {
 		this.tipoDeAtraccionPreferida = tipoDeAtraccionPreferida;
+	}
+
+	public int getDireccionX() {
+		return direccionX;
+	}
+
+	public void setDireccionX(int direccionX) {
+		this.direccionX = direccionX;
+	}
+
+	public int getDireccionY() {
+		return direccionY;
+	}
+
+	public void setDireccionY(int direccionY) {
+		this.direccionY = direccionY;
 	}
 
 }

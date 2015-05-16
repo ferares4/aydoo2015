@@ -7,7 +7,7 @@ import org.junit.Test;
 public class SugerenteDeVisitasTest {
 	
 	@Test
-	public void sugerirVisita(){
+	public void sugerirListaDeVisitasQueCumplenConRequisitosParaElUsuario(){
 		
 		List<Atraccion> listaDeAtracciones = new LinkedList<Atraccion>();
 		Usuario miUsuario = new Usuario();
@@ -47,7 +47,7 @@ public class SugerenteDeVisitasTest {
 	}
 
 	@Test
-	public void sugerirItinerarioPorMenorCostoDeAtraccion(){
+	public void sugerirItinerarioPorMenorCostoDeAtraccionDevuelveListaOrdenadaPorCostoHastaDondeAlcanzaElPresupuesto(){
 		
 		//Configuracion de Usuario de Prueba
 		Usuario miUsuario = new Usuario();
@@ -130,7 +130,7 @@ public class SugerenteDeVisitasTest {
 	}
 	
 	@Test
-	public void sugerirItinerarioPorMenorDistancia(){
+	public void sugerirItinerarioPorMenorDistanciaDevuelveListaDeAtraccionMasCercanaEnBaseALaPosicion(){
 		
 		//Configuracion de Usuario de Prueba
 		Usuario miUsuario = new Usuario();
@@ -138,6 +138,8 @@ public class SugerenteDeVisitasTest {
 		miUsuario.setPresupuesto(4000);
 		miUsuario.setTiempoDisponibleParaVisitas(168);
 		miUsuario.setVelocidadDeTraslado(10);
+		miUsuario.setDireccionX(0);
+		miUsuario.setDireccionY(0);
 
 		Atraccion[] vectorDeAtracciones = new Atraccion[]{new Atraccion(), new Atraccion(), new Atraccion(), new Atraccion(), new Atraccion(),new Atraccion(),new Atraccion()};
 

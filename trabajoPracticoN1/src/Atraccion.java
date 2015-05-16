@@ -49,24 +49,4 @@ public class Atraccion{
 		this.tipo = tipoAtraccion;
 	}
 		
-	//To DELETE
-	/*
-	public List<Promocion> buscarPromocionesVigentes(Promocion[] vectorDePromociones){
-		
-		List <Promocion> promocionesVigentes = new LinkedList<Promocion>();
-		
-		for (int i=0;i<vectorDePromociones.length;i++){
-			
-			if (vectorDePromociones[i].tienePromocion(this)){
-				
-				promocionesVigentes.add(vectorDePromociones[i]);
-				
-			}
-			
-		}
-		
-		return promocionesVigentes;		
-		
-	}
-	*/
 }

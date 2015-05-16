@@ -156,8 +156,8 @@ public class SugerenteDeVisitas {
 
 		double presupuesto = miUsuario.getPresupuesto();
 		int tiempoDisponible = miUsuario.getTiempoDisponibleParaVisitas();
-		int coordenadaActualX=0;
-		int coordenadaActualY=0;
+		int coordenadaActualX=miUsuario.getDireccionX();
+		int coordenadaActualY=miUsuario.getDireccionY();
 		List<Atraccion> listaDeAtraccionesDisponibles = this.sugerirVisita(miUsuario);
 		List<Atraccion> listaDeAtraccionesParaItinerario = new LinkedList<Atraccion>();
 		Atraccion atraccionTemporal = miUsuario.buscarAtraccionMasCercana(coordenadaActualX, coordenadaActualY, listaDeAtraccionesDisponibles);

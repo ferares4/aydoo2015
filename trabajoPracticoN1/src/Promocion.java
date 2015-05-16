@@ -4,7 +4,7 @@ import java.util.List;
 
 enum tipoDePromocion {PROMOCION_PORCENTUAL,PROMOCION_POR_PAQUETE,PROMOCIONAXB}
 
-public class Promocion {
+public class Promocion{
 	
 	private tipoDePromocion tipo;
 	private int periodoDeVigenciaEnDias;
@@ -24,12 +24,6 @@ public class Promocion {
 		
     }
 	
-	public boolean tienePromocion(Atraccion atraccion){
-		
-		return listaDeAtracciones.contains(atraccion);
-		
-	}
-		
 	
 	// Getters & Setters 
 	
