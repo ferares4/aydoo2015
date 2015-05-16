@@ -1,7 +1,8 @@
-
-public @interface _Correcciones {
-	
 	/*
+	
+	public @interface _Correcciones {
+	
+
 	La principal cuestión que veo es que el modelo lo siento distante de la realidad en varias cuestiones, por ejemplo la Promoción no tiene precio y el Paquete no sabe lo que incluye.
 	Hay una parte que no está modelada, lo que tiene que ver con el tipo de atraccion: paisaje, de aventura, de degustacion y que es lo que determina la prefencia del usuario.
 	Al mismo tiempo no veo el uso de técnicas OO, no hay polimorfismo pues la situaciones polimórficas se resuelven con if anidados (o case) lo cual quita flexibilidad y dificulta el mantenimiento.
@@ -27,7 +28,9 @@ public @interface _Correcciones {
 	No se pudo corregir:
 	- La clase AtraccionComparator está muy fulera tiene varios if > No encuentro otra forma de realizarlo
 	- La promoción no sabe cual es su costo, conceptualmente no cierra pues el costo es fundamental > Conceptualmente se entendio que la promocion aplica sobre un costo y no que en si guarda un costo, no encuentro forma de corregirlo en este diseño
-	*/
 	
 	
-}
+	
+	}
+
+*/
