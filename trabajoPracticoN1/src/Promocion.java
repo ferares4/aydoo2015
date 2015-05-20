@@ -20,7 +20,9 @@ public class Promocion{
 	
 	public void addAtraccion(Atraccion atraccion) {
 		
+		if (!listaDeAtracciones.contains(atraccion)){
 		listaDeAtracciones.add(atraccion);			
+		}
 		
     }
 	
