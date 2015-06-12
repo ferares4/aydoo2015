@@ -1,18 +1,13 @@
 import java.util.LinkedList;
 import java.util.List;
 
-
-enum tipoDePromocion {PROMOCION_PORCENTUAL,PROMOCION_POR_PAQUETE,PROMOCIONAXB}
-
 public class Promocion{
 	
-	private tipoDePromocion tipo;
 	private int periodoDeVigenciaEnDias;
 	private List<Atraccion> listaDeAtracciones;
 	
-	public Promocion(tipoDePromocion tipo, int periodo){
+	public Promocion(int periodo){
 		
-		this.tipo = tipo;
 		this.periodoDeVigenciaEnDias = periodo;
 		listaDeAtracciones = new LinkedList<Atraccion>();
 		
@@ -26,16 +21,13 @@ public class Promocion{
 		
     }
 	
+	public double calcularDescuento(Paquete paquete) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+		
 	
 	// Getters & Setters 
-	
-	public tipoDePromocion getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(tipoDePromocion tipo) {
-		this.tipo = tipo;
-	}
 
 	public int getPeriodoDeVigenciaEnDias() {
 		return periodoDeVigenciaEnDias;
@@ -52,6 +44,8 @@ public class Promocion{
 	public void setListaDeAtracciones(List<Atraccion> listaDeAtracciones) {
 		this.listaDeAtracciones = listaDeAtracciones;
 	}
+
+
 	
 
 }

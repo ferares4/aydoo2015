@@ -1,0 +1,31 @@
+Pendientes:
+
+ - Actualizar toda la documentación y arreglar los diagramas
+	-- Se actualizo el diagrama de clases, se estan actualizando los diagramas de secuencia
+
+ - Los diagramas de secuencia siguen estando mal pues no representan el código
+
+
+Corregidos:
+ - Falta el link a travis en el readme del repo
+	-- Se agrego el link
+ - Remover el enumerado de tipo de promociones y generar distintas clases de manera utilizar polimorfismo
+	-- Se creo una clase para cada promocion con sus respectivos tests y se implemento la logica que estaba dentro de la clase paquete de forma independiente en cada clase
+	-- El paquete ahora calcula el costo en base a promociones recorriendo todas las promociones disponibles y llamando al metodo calcularDescuento de la clase correspondiente en tiempo de ejecucion
+ - Implementar los nuevos tipos de promociones pedidos
+	-- Esto ya estaba implementado, igualmente aplico la misma correccion del punto anterior
+ - El tipo de Atraccion no está bien que lo modeles con un String. Debería utilizar una clase o un enumerado
+	-- Se implemento un enumerado y se hizo un refactor para cada "Tipo" previamente hecho con Strings
+ - Las nuevas funcionalidades pedidas no están implementadas
+	-- Todas las funcionalidads fueron implementadas
+ - Reimplementar (o remover) la clase AtracciónComparator. Tiene código que no se está usando en ningún lado (posiblemente porque te faltaron agregar tests). Al mismo tiempo no es una buena práctica usar CASE cuando se hace un diseño OO.. El uso de if/case muchas veces va en contra del polimorfismo. Una alternativa seria implementar distintos comparators según el criterio de comparación que gustes utilizar.
+	-- Se corrigio esta clase, habia una implementacion para comparar atraccion por tiempo que nunca se utilizo, ahora solamente compara el costo de 2 atracciones y se utiliza unicamente para ordenar una lista por costo
+	-- El SWITCH CASE ya no resulta necesario
+ - El código está un poco mejor pero sigue con cosas feas
+	-- Se corrigio re-implemento la logica de muchos metodos, mayormente para las promociones, no cuento con mas detalle de cosas para corregir en este punto
+ - Los mensaje de commit son demasiado genéricos, no describen los cambios realizados y no aportan ningún valor
+	-- Se agrego mayor detalle en los commits nuevos
+- También sigue habiendo problemas conceptuales de diseño principalmente en lo que refiere a modularización y asignación de responsabilidad. Esto queda evidente en el análisis de impacto donde se ve que las modificaciones pedidas a nivel funcional requieren cambios en varias partes del código más allá de lo esperado. 
+	-- El nuevo diseño de promociones deberia restar impacto en los cambios
+- La forma en que está modelado el Paquete sigue sin cerrar pues permite aplicar diversas promociones lo cual modifica el costo y no se sabe finalmente que promociones se están aplicando. 
+	-- Usando refactor se renombraron los metodos de calculo de costo para clarificar el modelo de esta clase

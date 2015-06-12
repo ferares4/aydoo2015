@@ -9,13 +9,24 @@ public class Paquete {
 	private List<Atraccion> listaDeAtraccionesContratadas;
 	private List<Integer> cantidadDeEntradas;
 	private Usuario usuarioDelPaquete;
+	private List<Promocion> listaDePromocionesDisponibles; 
 
 	
 	public Paquete(){
 		
 		listaDeAtraccionesContratadas = new LinkedList<Atraccion>();
 		cantidadDeEntradas = new LinkedList<Integer>();
+		listaDePromocionesDisponibles = new LinkedList<Promocion>();
 
+	}
+	
+	public void agregarPromocionDisponible(Promocion promocion){
+		
+		if (!this.listaDePromocionesDisponibles.contains(promocion)){
+			
+			this.listaDePromocionesDisponibles.add(promocion);			
+		}
+				
 	}
 	
 	public void comprarEntrada(Atraccion atraccion){
@@ -35,7 +46,7 @@ public class Paquete {
 		
 	}
 	
-	public void calcularCostoTotal(List <Atraccion> listaDeAtraccionesContratadas, List<Integer> cantidadDeEntradas){
+	public void calcularCostoTotalDelPaquete(List <Atraccion> listaDeAtraccionesContratadas, List<Integer> cantidadDeEntradas){
 		
 		Iterator<Atraccion> iteradorAtraccion = listaDeAtraccionesContratadas.iterator();
 		
@@ -48,7 +59,6 @@ public class Paquete {
 							
 				costoTotal = costoTotal + atraccionTemporal.getCosto()*cantidad;
 				
-			
 		}
 		
 		
@@ -56,147 +66,55 @@ public class Paquete {
 		
 	
 	/* Ajusta el costo total de un paquete teniendo en cuenta las promociones, se debe haber calculado previamente el costo total */
-	public void calcularCostoEnBaseAPromociones(Promocion[] vectorDePromociones){
+	public void ajustarCostoEnBaseAPromociones(){
 
-		this.calcularCostoTotal(listaDeAtraccionesContratadas, cantidadDeEntradas);
-		
-		if (this.aplicarPromocionExtrajero()==false){
+		boolean aplicaPromocionExtranjero=false;
+		double costoTotalTemporal = costoTotal;
+		double descuento=0;
+
+		//Recorre todas las promociones disponibles si esta promocion 
+		for (Promocion promocion : this.listaDePromocionesDisponibles){
+
+			if (promocion.getClass().equals(PromocionExtranjero.class) && promocion.getPeriodoDeVigenciaEnDias()>0){
+
+				descuento = promocion.calcularDescuento(this);
+
+				if (costoTotal == descuento*2){
 
 
-			this.aplicarPromocionPorcentual(vectorDePromociones);
-			this.aplicarPromocionPorPaquete(vectorDePromociones);
-			this.aplicarPromocionAxB(vectorDePromociones);
-
-
-		}
-
-	}
-	
-	public void aplicarPromocionPorPaquete(Promocion[] vectorDePromociones){
-		
-		//Chequea y descuenta si todas las atracciones del itinerario tienen una promocion por paquete
-		for (int i=0;i<vectorDePromociones.length;i++){
-
-			if (vectorDePromociones[i].getTipo().equals(tipoDePromocion.PROMOCION_POR_PAQUETE) && vectorDePromociones[i].getPeriodoDeVigenciaEnDias()>0){
-
-				if (vectorDePromociones[i].getListaDeAtracciones().containsAll(listaDeAtraccionesContratadas)){
-
-					this.costoTotal = costoTotal-((costoTotal*15)/100);
+					costoTotalTemporal -= descuento;
+					aplicaPromocionExtranjero=true;
 
 				}
 
 			}
 
-		}
-		
-	}
-	
-	
-	public void aplicarPromocionPorcentual(Promocion[] vectorDePromociones){
-		
-		Iterator<Atraccion> iterador = listaDeAtraccionesContratadas.iterator();
-		
-		//Chequea y descuenta todas las promocines porcentuales
-		while (iterador.hasNext()){
+		}	
 
-			Atraccion atraccionTemporal = iterador.next();
 
-			for (int i=0;i<vectorDePromociones.length;i++){
+		if (aplicaPromocionExtranjero==false){
 
-				if (vectorDePromociones[i].getTipo().equals(tipoDePromocion.PROMOCION_PORCENTUAL) && vectorDePromociones[i].getPeriodoDeVigenciaEnDias()>0){
+			for (Promocion promocion2 : this.listaDePromocionesDisponibles){
 
-					if (vectorDePromociones[i].getListaDeAtracciones().contains(atraccionTemporal)){
+				if (promocion2.getPeriodoDeVigenciaEnDias()>0) {
 
-						this.costoTotal = costoTotal - ((atraccionTemporal.getCosto()*10)/100);
-
-					}
-
+					costoTotalTemporal -= promocion2.calcularDescuento(this);
+				
 				}
-
-
-			} 
-
-		}
-		
-		
-	}
-	
-	public void aplicarPromocionAxB(Promocion[] vectorDePromociones){
-		
-		Iterator<Atraccion> iterador = listaDeAtraccionesContratadas.iterator();
-		
-		//Chequea si todas las promocines del itinerario tienen promocion AxB luego descuenta la mas barata
-		for (int i=0;i<vectorDePromociones.length;i++){
-
-			if (vectorDePromociones[i].getTipo().equals(tipoDePromocion.PROMOCIONAXB) && vectorDePromociones[i].getPeriodoDeVigenciaEnDias()>0){
-
-				if (vectorDePromociones[i].getListaDeAtracciones().containsAll(listaDeAtraccionesContratadas)){
-
-					while(iterador.hasNext()){
-
-						List<Atraccion> listaXCosto = new SugerenteDeVisitas().ordenarListaPorCosto(listaDeAtraccionesContratadas);
-						costoTotal -= listaXCosto.get(0).getCosto();
-
-					}
-
-				}
-
 			}
+		}
 
-		}
-		
-	}
-	
-	public boolean aplicarPromocionExtrajero(){
-		
-		Atraccion atraccionTemporal = usuarioDelPaquete.buscarAtraccionMasCercana(usuarioDelPaquete.getDireccionX(),usuarioDelPaquete.getDireccionY(),listaDeAtraccionesContratadas);
-		int distancia = this.usuarioDelPaquete.calcularDistanciaDeViaje(usuarioDelPaquete.getDireccionX(), usuarioDelPaquete.getDireccionY(), atraccionTemporal.getCoordenadaX(),atraccionTemporal.getCoordenadaY());
-		
-		if (distancia>200){
-			
-			this.costoTotal = costoTotal/2;
-			return true;
-		}
-		
-		return false;
-		
-	}
-	
+		costoTotal = costoTotalTemporal;
 
-	
-	public void aplicarPromocionFamiliar(List <Atraccion> listaDeAtraccionesContratadas, List<Integer> cantidadDeEntradas){
-		
-		Iterator<Atraccion> iteradorAtraccion = listaDeAtraccionesContratadas.iterator();
-				
-		while (iteradorAtraccion.hasNext()){
-			
-			Atraccion atraccionTemporal = new Atraccion();
-			atraccionTemporal = iteradorAtraccion.next();
-			int indice = listaDeAtraccionesContratadas.indexOf(atraccionTemporal);
-			int cantidad = cantidadDeEntradas.get(indice);
-			
-			if (cantidad==4){
-				
-				// Al costo total se resta el 10% de la atraccion
-				this.costoTotal = this.costoTotal - ((atraccionTemporal.getCosto()*10)/100);
-				
-			}
-			
-			else if (cantidad>4){
-				
-				// Al costo total se resta el 10% de la atraccion y un 30% por cada entrada extra
-				this.costoTotal = this.costoTotal - ((atraccionTemporal.getCosto()*10)/100) - (((atraccionTemporal.getCosto()*30)/100)*(cantidad-4));
-				
-			}
-			
-			
-		}
-		
-		
 	}
+	
 
 	// Getters & Setters:
 	
+	public List<Promocion> getListaDePromocionesDisponibles() {
+		return listaDePromocionesDisponibles;
+	}
+
 	public double getCostoTotal() {
 		
 		return costoTotal;

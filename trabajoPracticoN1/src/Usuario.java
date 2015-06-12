@@ -7,7 +7,7 @@ public class Usuario {
 	private double presupuesto;
 	private int tiempoDisponibleParaVisitas;
 	private int velocidadDeTraslado;
-	private String tipoDeAtraccionPreferida;
+	private TipoDeAtraccion tipoDeAtraccionPreferida;
 	private int direccionX;
 	private int direccionY;
 	
@@ -82,11 +82,11 @@ public class Usuario {
 		this.velocidadDeTraslado = velocidadDeTraslado;
 	}
 
-	public String getTipoDeAtraccionPreferida() {
+	public TipoDeAtraccion getTipoDeAtraccionPreferida() {
 		return tipoDeAtraccionPreferida;
 	}
 
-	public void setTipoDeAtraccionPreferida(String tipoDeAtraccionPreferida) {
+	public void setTipoDeAtraccionPreferida(TipoDeAtraccion tipoDeAtraccionPreferida) {
 		this.tipoDeAtraccionPreferida = tipoDeAtraccionPreferida;
 	}
 

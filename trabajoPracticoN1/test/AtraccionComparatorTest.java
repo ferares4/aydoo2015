@@ -11,7 +11,7 @@ public class AtraccionComparatorTest {
 		
 		Atraccion atraccionMayorCosto = new Atraccion();
 		Atraccion atraccionMenorCosto = new Atraccion();
-		AtraccionComparator comparador = new AtraccionComparator(Atributos.COSTO);
+		AtraccionComparator comparador = new AtraccionComparator();
 		
 		atraccionMayorCosto.setCosto(100);
 		atraccionMenorCosto.setCosto(50);
@@ -26,7 +26,7 @@ public class AtraccionComparatorTest {
 		
 		Atraccion atraccionMayorCosto = new Atraccion();
 		Atraccion atraccionMenorCosto = new Atraccion();
-		AtraccionComparator comparador = new AtraccionComparator(Atributos.COSTO);
+		AtraccionComparator comparador = new AtraccionComparator();
 		
 		atraccionMayorCosto.setCosto(100);
 		atraccionMenorCosto.setCosto(50);
@@ -41,7 +41,7 @@ public class AtraccionComparatorTest {
 		
 		Atraccion atraccionMayorCosto = new Atraccion();
 		Atraccion atraccionMenorCosto = new Atraccion();
-		AtraccionComparator comparador = new AtraccionComparator(Atributos.COSTO);
+		AtraccionComparator comparador = new AtraccionComparator();
 		
 		atraccionMayorCosto.setCosto(100);
 		atraccionMenorCosto.setCosto(100);

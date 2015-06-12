@@ -20,10 +20,11 @@ Corregidos:
 		-- no es consistente con el código, no muestra las estructuras de control (branches y loops)
 	- La relación entre Atracción y Promoción está representada en el diagrama de clases de una forma que no consistente con el código		
 	- Los test son insuficientes, por ejemplo calcularCostoDePaqueteUsandoPromociones tiene un solo test cuando en realidad hay muchas situaciones que no hay sido contempladas.
+	- La clase AtraccionComparator está muy fulera tiene varios if > corregido, detalle en Correcciones Devolucion 2
+	- Algunos aspectos que deberian usarse con herencia aun se estan manejando con enumerados > Corregido, detalle en Correcciones Devolucion 2
 
 No se pudo corregir:
-
-	- La clase AtraccionComparator está muy fulera tiene varios if > No encuentro otra forma de realizarlo
+	
 	- La promoción no sabe cual es su costo, conceptualmente no cierra pues el costo es fundamental > Conceptualmente se entendio que la promocion aplica sobre un costo y no que en si guarda un costo, no encuentro forma de corregirlo en este diseño
-	- Algunos aspectos que deberian usarse con herencia aun se estan manejando con enumerados, se tendra en cuenta para futuros releases	
+
 

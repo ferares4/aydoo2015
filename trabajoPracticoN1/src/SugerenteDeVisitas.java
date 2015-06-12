@@ -19,14 +19,7 @@ public class SugerenteDeVisitas {
 	
 	public List<Atraccion> ordenarListaPorCosto(List <Atraccion> miLista){
 
-		Collections.sort(miLista, new AtraccionComparator(Atributos.COSTO));
-		return miLista;
-
-	}
-
-	public List<Atraccion> ordenarListaPorTiempo(List <Atraccion> miLista){
-
-		Collections.sort(miLista, new AtraccionComparator(Atributos.TIEMPO));
+		Collections.sort(miLista, new AtraccionComparator());
 		return miLista;
 
 	}

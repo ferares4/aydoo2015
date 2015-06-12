@@ -1,313 +1,208 @@
-import java.util.List;
-
 import org.junit.Assert;
 import org.junit.Test;
 
 
 public class PaqueteTest {
-
-	@Test
-	public void calcularCostoDePaqueteUsandoPromociones(){
-		
-		//Configuracion de Usuario de Prueba
-		Usuario miUsuario = new Usuario();
-		miUsuario.setDireccionX(0);
-		miUsuario.setDireccionY(0);
-		miUsuario.setTipoDeAtraccionPreferida("Gondor");
-		miUsuario.setPresupuesto(4000);
-		miUsuario.setTiempoDisponibleParaVisitas(168);
-		miUsuario.setVelocidadDeTraslado(10);
-		miUsuario.setDireccionX(0);
-		miUsuario.setDireccionY(0);
-
-				
-		Atraccion[] vectorDeAtracciones = new Atraccion[]{new Atraccion(), new Atraccion(), new Atraccion(), new Atraccion(), new Atraccion(),new Atraccion(),new Atraccion()};
-		
-		//Configuracion de Atraccion de Prueba > Cumple todas las condiciones
-		vectorDeAtracciones[0].setTipo("Gondor");
-		vectorDeAtracciones[0].setCosto(1200);
-		vectorDeAtracciones[0].setTiempoNecesarioParaVisita(10);
-		vectorDeAtracciones[0].setCoordenadaX(10);
-		vectorDeAtracciones[0].setCoordenadaY(15);
-		
-		//Configuracion de Atraccion de Prueba > Cumple todas las condiciones
-		vectorDeAtracciones[1].setTipo("Mordor");
-		vectorDeAtracciones[1].setCosto(450);
-		vectorDeAtracciones[1].setTiempoNecesarioParaVisita(20);
-		vectorDeAtracciones[1].setCoordenadaX(20);
-		vectorDeAtracciones[1].setCoordenadaY(30);
-		
-		//Configuracion de Atraccion de Prueba > Cumple todas las condiciones
-		vectorDeAtracciones[2].setTipo("La Comarca");
-		vectorDeAtracciones[2].setCosto(700);
-		vectorDeAtracciones[2].setTiempoNecesarioParaVisita(40);
-		vectorDeAtracciones[2].setCoordenadaX(35);
-		vectorDeAtracciones[2].setCoordenadaY(10);
-		
-		//Configuracion de Atraccion de Prueba > Cumple todas las condiciones
-		vectorDeAtracciones[3].setTipo("Bosque Encantado");
-		vectorDeAtracciones[3].setCosto(700);
-		vectorDeAtracciones[3].setTiempoNecesarioParaVisita(5);
-		vectorDeAtracciones[3].setCoordenadaX(40);
-		vectorDeAtracciones[3].setCoordenadaY(20);
-		
-		
-		//Configuracion de Atraccion de Prueba > Cumple todas las condiciones
-		vectorDeAtracciones[4].setTipo("Paseo de Aventura");
-		vectorDeAtracciones[4].setCosto(800);
-		vectorDeAtracciones[4].setTiempoNecesarioParaVisita(30);
-		vectorDeAtracciones[4].setCoordenadaX(40);
-		vectorDeAtracciones[4].setCoordenadaY(40);
-		
-		//Configuracion de Atraccion de Prueba > Cumple todas las condiciones
-		vectorDeAtracciones[5].setTipo("Minas Tirith");
-		vectorDeAtracciones[5].setCosto(1500);
-		vectorDeAtracciones[5].setTiempoNecesarioParaVisita(10);
-		vectorDeAtracciones[5].setCoordenadaX(60);
-		vectorDeAtracciones[5].setCoordenadaY(35);
-		
-		//Configuracion de Atraccion de Prueba > Cumple todas las condiciones
-		vectorDeAtracciones[6].setTipo("Torre");
-		vectorDeAtracciones[6].setCosto(350);
-		vectorDeAtracciones[6].setTiempoNecesarioParaVisita(15);
-		vectorDeAtracciones[6].setCoordenadaX(60);
-		vectorDeAtracciones[6].setCoordenadaY(20);
-		
-		Promocion promocionPorPorcentaje = new Promocion(tipoDePromocion.PROMOCION_PORCENTUAL, 30);
-		Promocion promocionPorPaquete = new Promocion(tipoDePromocion.PROMOCION_POR_PAQUETE, 30);
-		Promocion promocionAXB = new Promocion(tipoDePromocion.PROMOCIONAXB, 30);
-		
-		//Agrego 1 atraccion al tipo Promocion por porcentaje
-		promocionPorPorcentaje.addAtraccion(vectorDeAtracciones[0]);
-		
-		//Agrego varias atracciones al tipo de Promo Promocion x Paquete
-		promocionPorPaquete.addAtraccion(vectorDeAtracciones[1]);
-		promocionPorPaquete.addAtraccion(vectorDeAtracciones[4]);
-		promocionPorPaquete.addAtraccion(vectorDeAtracciones[5]);
-		
-		//Agrego 4 atracciones al tipo AxB
-		promocionAXB.addAtraccion(vectorDeAtracciones[0]);
-		promocionAXB.addAtraccion(vectorDeAtracciones[1]);
-		promocionAXB.addAtraccion(vectorDeAtracciones[4]);
-		promocionAXB.addAtraccion(vectorDeAtracciones[5]);
-		
-		SugerenteDeVisitas miSugerente = new SugerenteDeVisitas(vectorDeAtracciones); 
-		List<Atraccion> itinerario = miSugerente.sugerirItinerarioPorMenorDistancia(miUsuario);
-		
-		//corroboro que las promociones aplicadas devuelven resultados esperados
-		Assert.assertTrue(promocionPorPorcentaje.getListaDeAtracciones().contains(vectorDeAtracciones[0]));
-		Assert.assertFalse(promocionPorPaquete.getListaDeAtracciones().containsAll(itinerario));
-		Assert.assertTrue(promocionAXB.getListaDeAtracciones().containsAll(itinerario));
-		
-		Paquete paquete = new Paquete();
-		paquete.setUsuarioDelPaquete(miUsuario);
-		
-		//Compro 1 entrada de cada Atraccion
-		paquete.comprarEntrada(vectorDeAtracciones[0]);
-		paquete.comprarEntrada(vectorDeAtracciones[1]);
-		paquete.comprarEntrada(vectorDeAtracciones[2]);
-		paquete.comprarEntrada(vectorDeAtracciones[3]);
-		paquete.comprarEntrada(vectorDeAtracciones[4]);
-		paquete.comprarEntrada(vectorDeAtracciones[5]);
-		paquete.comprarEntrada(vectorDeAtracciones[5]);
-		
-
-		/*Para el itinerario esperado y los paquetes asignados el precio total deberia dar:
-		 * 
-		 * Costo total inicial = 3950,0
-		 * Gondor tiene promo porcentual 10% > Costo total 3950,0 - (1200 *10%) = 3830,0
-		 * Mordor, Paseo y Minas tiene promo por paquete 15% sobre el total > Costo total = 3830,0 - (3830,0*15%) = 3255,5
-		 * Gondor, Mordor, Paseo y Minas tienen promo AxB, debe descontar la mas barata (Mordor) > Costo total = 3255,5 - 450 = 2805,5
-		 * 
-		 */
-		paquete.calcularCostoEnBaseAPromociones(new Promocion[]{promocionPorPorcentaje,promocionPorPaquete,promocionAXB});
-		Assert.assertEquals(2805,5, paquete.getCostoTotal());
-		
-	}
 	
-	@Test
-	public void calcularCostoDePaqueteConPromocionExtranjero(){
+	@Test 
+	public void crearUnPaqueteYCargarPromocionesDisponibles(){
 		
-		//Configuracion de Usuario de Prueba
-		Usuario miUsuario = new Usuario();
-		miUsuario.setTipoDeAtraccionPreferida("Gondor");
-		miUsuario.setPresupuesto(4000);
-		miUsuario.setTiempoDisponibleParaVisitas(200000);
-		miUsuario.setVelocidadDeTraslado(10);
-		miUsuario.setDireccionX(0);
-		miUsuario.setDireccionY(0);
-				
-				
-		Atraccion[] vectorDeAtracciones = new Atraccion[]{new Atraccion(), new Atraccion(), new Atraccion(), new Atraccion(), new Atraccion(),new Atraccion(),new Atraccion()};
-				
-		//Configuracion de Atraccion de Prueba > Cumple todas las condiciones
-		vectorDeAtracciones[0].setTipo("Gondor");
-		vectorDeAtracciones[0].setCosto(1200);
-		vectorDeAtracciones[0].setTiempoNecesarioParaVisita(10);
-		vectorDeAtracciones[0].setCoordenadaX(600);
-		vectorDeAtracciones[0].setCoordenadaY(700);
-				
-		//Configuracion de Atraccion de Prueba > Cumple todas las condiciones
-		vectorDeAtracciones[1].setTipo("Mordor");
-		vectorDeAtracciones[1].setCosto(450);
-		vectorDeAtracciones[1].setTiempoNecesarioParaVisita(20);
-		vectorDeAtracciones[1].setCoordenadaX(600);
-		vectorDeAtracciones[1].setCoordenadaY(600);
-				
-		//Configuracion de Atraccion de Prueba > Cumple todas las condiciones
-		vectorDeAtracciones[2].setTipo("La Comarca");
-		vectorDeAtracciones[2].setCosto(700);
-		vectorDeAtracciones[2].setTiempoNecesarioParaVisita(40);
-		vectorDeAtracciones[2].setCoordenadaX(800);
-		vectorDeAtracciones[2].setCoordenadaY(900);
-				
-		SugerenteDeVisitas miSugerente = new SugerenteDeVisitas(vectorDeAtracciones); 
-		List<Atraccion> itinerario = miSugerente.sugerirVisita(miUsuario);
-		Paquete paquete = new Paquete();
-		paquete.setUsuarioDelPaquete(miUsuario);
-				
-		//Compro una entrada para cada atraccion
-		paquete.comprarEntrada(vectorDeAtracciones[0]);
-		paquete.comprarEntrada(vectorDeAtracciones[1]);
-		paquete.comprarEntrada(vectorDeAtracciones[2]);
+		Paquete miPaquete = new Paquete();
+		Assert.assertEquals(0,0,miPaquete.getCostoTotal());
 		
-		//Verifico que Mordor es la atraccion mas cercana del itinerario
-		Assert.assertEquals(vectorDeAtracciones[1].getTipo(),miUsuario.buscarAtraccionMasCercana(miUsuario.getDireccionX(), miUsuario.getDireccionY(), itinerario).getTipo());
-			
-		//Verifico que la distancia a Mordor es mayor que 200
-		Assert.assertEquals(849,miUsuario.calcularDistanciaDeViaje(0, 0, 600, 600));
-
-		/*El paquete actual solo aplica a promocion extranjero
-		 * 
-		 * El precio final deberia dar 1175
-		 * 
-		 */
+		miPaquete.calcularCostoTotalDelPaquete(miPaquete.getListaDeAtraccionesContratadas(), miPaquete.getCantidadDeEntradas());
+		Assert.assertEquals(0,0,miPaquete.getCostoTotal());
 		
-		paquete.calcularCostoEnBaseAPromociones(new Promocion[]{});
-		Assert.assertEquals(1175,0,paquete.getCostoTotal());
-				
+		Promocion promocionPorcentual = new PromocionPorcentual(30, 10);
+		Promocion promocionAbsoluta = new PromocionAbsoluta(30, (double) 200);
+		Promocion promocionFamiliar = new PromocionFamiliar(30);
+		Promocion promocionExtranjero = new PromocionExtranjero(30);
+		Promocion promocionAxB = new PromocionAxB(30);
+		
+		miPaquete.agregarPromocionDisponible(promocionPorcentual);
+		miPaquete.agregarPromocionDisponible(promocionAbsoluta);
+		miPaquete.agregarPromocionDisponible(promocionFamiliar);
+		miPaquete.agregarPromocionDisponible(promocionExtranjero);
+		miPaquete.agregarPromocionDisponible(promocionAxB);
+		
+		Assert.assertTrue(miPaquete.getListaDePromocionesDisponibles().contains(promocionPorcentual));
+		Assert.assertTrue(miPaquete.getListaDePromocionesDisponibles().contains(promocionAbsoluta));
+		Assert.assertTrue(miPaquete.getListaDePromocionesDisponibles().contains(promocionFamiliar));
+		Assert.assertTrue(miPaquete.getListaDePromocionesDisponibles().contains(promocionExtranjero));
+		Assert.assertTrue(miPaquete.getListaDePromocionesDisponibles().contains(promocionAxB));
+		Assert.assertEquals(5, miPaquete.getListaDePromocionesDisponibles().size());
+		
 	}
 	
 	@Test
 	public void comprarEntradasParaVariasAtracciones(){
+
+		InicialidazorDeTests miInicializador = new InicialidazorDeTests();
+		Paquete miPaquete = miInicializador.getPaquete();
 		
-		//Configuracion de Usuario de Prueba
-		Usuario miUsuario = new Usuario();
-		miUsuario.setTipoDeAtraccionPreferida("Gondor");
-		miUsuario.setPresupuesto(4000);
-		miUsuario.setTiempoDisponibleParaVisitas(200000);
-		miUsuario.setVelocidadDeTraslado(10);
-		miUsuario.setDireccionX(0);
-		miUsuario.setDireccionY(0);
-		
-		Atraccion[] vectorDeAtracciones = new Atraccion[]{new Atraccion(), new Atraccion(), new Atraccion()};
-		
-		//Configuracion de Atraccion de Prueba
-		vectorDeAtracciones[0].setTipo("Gondor");
-		vectorDeAtracciones[0].setCosto(1200);
-		vectorDeAtracciones[0].setTiempoNecesarioParaVisita(10);
-		vectorDeAtracciones[0].setCoordenadaX(10);
-		vectorDeAtracciones[0].setCoordenadaY(15);
-		
-		//Configuracion de Atraccion de Prueba
-		vectorDeAtracciones[1].setTipo("Mordor");
-		vectorDeAtracciones[1].setCosto(450);
-		vectorDeAtracciones[1].setTiempoNecesarioParaVisita(20);
-		vectorDeAtracciones[1].setCoordenadaX(20);
-		vectorDeAtracciones[1].setCoordenadaY(30);
-		
-		//Configuracion de Atraccion de Prueba
-		vectorDeAtracciones[2].setTipo("La Comarca");
-		vectorDeAtracciones[2].setCosto(700);
-		vectorDeAtracciones[2].setTiempoNecesarioParaVisita(40);
-		vectorDeAtracciones[2].setCoordenadaX(35);
-		vectorDeAtracciones[2].setCoordenadaY(10);
-		
-		Paquete paquete = new Paquete();
-		paquete.setUsuarioDelPaquete(miUsuario);
-		
-		paquete.comprarEntrada(vectorDeAtracciones[0]);
-		paquete.comprarEntrada(vectorDeAtracciones[0]);
-		paquete.comprarEntrada(vectorDeAtracciones[0]);
-		
-		paquete.comprarEntrada(vectorDeAtracciones[1]);
-		
-		paquete.comprarEntrada(vectorDeAtracciones[2]);
-		paquete.comprarEntrada(vectorDeAtracciones[2]);
-		paquete.comprarEntrada(vectorDeAtracciones[2]);
-		paquete.comprarEntrada(vectorDeAtracciones[2]);
+		miPaquete.comprarEntrada(miInicializador.vectorDeAtracciones[0]);
+		miPaquete.comprarEntrada(miInicializador.vectorDeAtracciones[0]);
+		miPaquete.comprarEntrada(miInicializador.vectorDeAtracciones[0]);
+		miPaquete.comprarEntrada(miInicializador.vectorDeAtracciones[1]);
+		miPaquete.comprarEntrada(miInicializador.vectorDeAtracciones[2]);
+		miPaquete.comprarEntrada(miInicializador.vectorDeAtracciones[2]);
+		miPaquete.comprarEntrada(miInicializador.vectorDeAtracciones[2]);
+		miPaquete.comprarEntrada(miInicializador.vectorDeAtracciones[2]);
 		
 		//Compruebo que el paquete guardo en su lista de atracciones contratadas todas las atraciones donde compre entradas
-		Assert.assertTrue(paquete.getListaDeAtraccionesContratadas().contains(vectorDeAtracciones[0]));
-		Assert.assertTrue(paquete.getListaDeAtraccionesContratadas().contains(vectorDeAtracciones[1]));
-		Assert.assertTrue(paquete.getListaDeAtraccionesContratadas().contains(vectorDeAtracciones[2]));
+		Assert.assertTrue(miPaquete.getListaDeAtraccionesContratadas().contains(miInicializador.vectorDeAtracciones[0]));
+		Assert.assertTrue(miPaquete.getListaDeAtraccionesContratadas().contains(miInicializador.vectorDeAtracciones[1]));
+		Assert.assertTrue(miPaquete.getListaDeAtraccionesContratadas().contains(miInicializador.vectorDeAtracciones[2]));
+		Assert.assertEquals(miInicializador.vectorDeAtracciones[0], miPaquete.getListaDeAtraccionesContratadas().get(0));
 		
 		//Compruebo la cantidad de entradas
-		Assert.assertEquals(3, (int) paquete.getCantidadDeEntradas().get(paquete.getListaDeAtraccionesContratadas().indexOf(vectorDeAtracciones[0])));
-		Assert.assertEquals(1, (int) paquete.getCantidadDeEntradas().get(paquete.getListaDeAtraccionesContratadas().indexOf(vectorDeAtracciones[1])));
-		Assert.assertEquals(4, (int) paquete.getCantidadDeEntradas().get(paquete.getListaDeAtraccionesContratadas().indexOf(vectorDeAtracciones[2])));
+		Assert.assertEquals(3, (int) miPaquete.getCantidadDeEntradas().get(miPaquete.getListaDeAtraccionesContratadas().indexOf(miInicializador.vectorDeAtracciones[0])));
+		Assert.assertEquals(1, (int) miPaquete.getCantidadDeEntradas().get(miPaquete.getListaDeAtraccionesContratadas().indexOf(miInicializador.vectorDeAtracciones[1])));
+		Assert.assertEquals(4, (int) miPaquete.getCantidadDeEntradas().get(miPaquete.getListaDeAtraccionesContratadas().indexOf(miInicializador.vectorDeAtracciones[2])));
 
+	}
+
+	@Test
+	public void calcularCostoDePaqueteConTodasLasPromocionesMenosPromocionExtranjero(){
+
+		InicialidazorDeTests miInicializador = new InicialidazorDeTests();
+		Paquete miPaquete = miInicializador.getPaquete();
+		
+		miPaquete.comprarEntrada(miInicializador.vectorDeAtracciones[0]);
+		miPaquete.comprarEntrada(miInicializador.vectorDeAtracciones[0]);
+		miPaquete.comprarEntrada(miInicializador.vectorDeAtracciones[0]);
+		miPaquete.comprarEntrada(miInicializador.vectorDeAtracciones[1]);
+		miPaquete.comprarEntrada(miInicializador.vectorDeAtracciones[1]);
+		miPaquete.comprarEntrada(miInicializador.vectorDeAtracciones[2]);
+		miPaquete.comprarEntrada(miInicializador.vectorDeAtracciones[2]);
+		miPaquete.comprarEntrada(miInicializador.vectorDeAtracciones[2]);
+		miPaquete.comprarEntrada(miInicializador.vectorDeAtracciones[2]);
+		miPaquete.comprarEntrada(miInicializador.vectorDeAtracciones[2]);
+		miPaquete.comprarEntrada(miInicializador.vectorDeAtracciones[2]);
+		miPaquete.comprarEntrada(miInicializador.vectorDeAtracciones[4]);
+		miPaquete.comprarEntrada(miInicializador.vectorDeAtracciones[4]);
+		miPaquete.comprarEntrada(miInicializador.vectorDeAtracciones[5]);
+		miPaquete.comprarEntrada(miInicializador.vectorDeAtracciones[5]);
+		
+		miPaquete.calcularCostoTotalDelPaquete(miPaquete.getListaDeAtraccionesContratadas(), miPaquete.getCantidadDeEntradas());
+				
+		//Corrobora que el costo total del paquete sin promociones sea el esperado
+		Assert.assertTrue(miPaquete.getCostoTotal() == (double) 13300);
+
+		//Remuevo la Promocion Extranjero para que no aplique
+		miPaquete.getListaDePromocionesDisponibles().remove(4);
+		
+		/* Para el itinerario esperado y los paquetes asignados el precio total deberia dar:
+		 * 
+		 * Costo total inicial = 13300
+		 * Descuento por promocion porcentual = 13300 * 10% = 1330
+		 * Descuento por promocion Absoluta = 200
+		 * Descuento por promocion AxB, la mas barata es Mordor 450, se compraron 2 entradas = 900
+		 * Descuento por promocion Familiar (Al descuento se agrega el 10% del valor de la atraccion y un 30% por cada entrada extra)
+		 * Son 6 entradas corresponde, un 10% del valor de la 4ta entrada mas un 30% por cada entrada extra (2) = (700*10%) + (700*30%)*2 = 490
+		 * 
+		 * Costo total Final = 13300 - (1330 + 200 + 900 + 490) = 9160
+		 */
+		
+		miPaquete.ajustarCostoEnBaseAPromociones();
+		
+		//Corrobora que la promocion Familiar se aplique correctamente
+		Assert.assertTrue(miPaquete.getCostoTotal() == (double) 10380);
+		
 	}
 	
 	@Test
-	public void calcularCostoDePaqueteConPromocionFamiliar(){
+	public void calcularCostoDePaqueteConTodasLasPromocionesDebeAplicarSoloPromocionExtranjero(){
 
-		//Configuracion de Usuario de Prueba
-		Usuario miUsuario = new Usuario();
-		miUsuario.setTipoDeAtraccionPreferida("Gondor");
-		miUsuario.setPresupuesto(4000);
-		miUsuario.setTiempoDisponibleParaVisitas(200000);
-		miUsuario.setVelocidadDeTraslado(10);
-		miUsuario.setDireccionX(0);
-		miUsuario.setDireccionY(0);
+		InicialidazorDeTests miInicializador = new InicialidazorDeTests();
+		Paquete miPaquete = miInicializador.getPaquete();
 		
-		Atraccion[] vectorDeAtracciones = new Atraccion[]{new Atraccion(), new Atraccion(), new Atraccion()};
+		miPaquete.comprarEntrada(miInicializador.vectorDeAtracciones[0]);
+		miPaquete.comprarEntrada(miInicializador.vectorDeAtracciones[0]);
+		miPaquete.comprarEntrada(miInicializador.vectorDeAtracciones[0]);
+		miPaquete.comprarEntrada(miInicializador.vectorDeAtracciones[1]);
+		miPaquete.comprarEntrada(miInicializador.vectorDeAtracciones[1]);
+		miPaquete.comprarEntrada(miInicializador.vectorDeAtracciones[2]);
+		miPaquete.comprarEntrada(miInicializador.vectorDeAtracciones[2]);
+		miPaquete.comprarEntrada(miInicializador.vectorDeAtracciones[2]);
+		miPaquete.comprarEntrada(miInicializador.vectorDeAtracciones[2]);
+		miPaquete.comprarEntrada(miInicializador.vectorDeAtracciones[2]);
+		miPaquete.comprarEntrada(miInicializador.vectorDeAtracciones[2]);
+		miPaquete.comprarEntrada(miInicializador.vectorDeAtracciones[4]);
+		miPaquete.comprarEntrada(miInicializador.vectorDeAtracciones[4]);
+		miPaquete.comprarEntrada(miInicializador.vectorDeAtracciones[5]);
+		miPaquete.comprarEntrada(miInicializador.vectorDeAtracciones[5]);
 		
-		//Configuracion de Atraccion de Prueba
-		vectorDeAtracciones[0].setTipo("Gondor");
-		vectorDeAtracciones[0].setCosto(1200);
-		vectorDeAtracciones[0].setTiempoNecesarioParaVisita(10);
-		vectorDeAtracciones[0].setCoordenadaX(10);
-		vectorDeAtracciones[0].setCoordenadaY(15);
-		
-		//Configuracion de Atraccion de Prueba
-		vectorDeAtracciones[1].setTipo("Mordor");
-		vectorDeAtracciones[1].setCosto(450);
-		vectorDeAtracciones[1].setTiempoNecesarioParaVisita(20);
-		vectorDeAtracciones[1].setCoordenadaX(20);
-		vectorDeAtracciones[1].setCoordenadaY(30);
-		
-		//Configuracion de Atraccion de Prueba
-		vectorDeAtracciones[2].setTipo("La Comarca");
-		vectorDeAtracciones[2].setCosto(700);
-		vectorDeAtracciones[2].setTiempoNecesarioParaVisita(40);
-		vectorDeAtracciones[2].setCoordenadaX(35);
-		vectorDeAtracciones[2].setCoordenadaY(10);
-		
-		Paquete paquete = new Paquete();
-		paquete.setUsuarioDelPaquete(miUsuario);
-		
-		paquete.comprarEntrada(vectorDeAtracciones[0]);
-		paquete.comprarEntrada(vectorDeAtracciones[0]);
-		paquete.comprarEntrada(vectorDeAtracciones[0]);
-		
-		paquete.comprarEntrada(vectorDeAtracciones[1]);
-		
-		paquete.comprarEntrada(vectorDeAtracciones[2]);
-		paquete.comprarEntrada(vectorDeAtracciones[2]);
-		paquete.comprarEntrada(vectorDeAtracciones[2]);
-		paquete.comprarEntrada(vectorDeAtracciones[2]);
-		paquete.comprarEntrada(vectorDeAtracciones[2]);
-		paquete.comprarEntrada(vectorDeAtracciones[2]);
-		
+		miPaquete.calcularCostoTotalDelPaquete(miPaquete.getListaDeAtraccionesContratadas(), miPaquete.getCantidadDeEntradas());
+				
 		//Corrobora que el costo total del paquete sin promociones sea el esperado
-		paquete.calcularCostoTotal(paquete.getListaDeAtraccionesContratadas(), paquete.getCantidadDeEntradas());
-		Assert.assertEquals(8250,0, paquete.getCostoTotal());
+		Assert.assertTrue(miPaquete.getCostoTotal() == (double) 13300);	
+		
+		/* Para el itinerario esperado y los paquetes asignados el precio total deberia dar:
+		 * 
+		 * Costo total inicial = 13300
+		 * Descuento por promocion extranjero = 13300 / 2 =  6650
+		 * Costo total Final = 13300 - 6650 = 6650
+		 */
+		
+		miPaquete.ajustarCostoEnBaseAPromociones();
 		
 		//Corrobora que la promocion Familiar se aplique correctamente
-		paquete.aplicarPromocionFamiliar(paquete.getListaDeAtraccionesContratadas(), paquete.getCantidadDeEntradas());
-		Assert.assertEquals(7760,0, paquete.getCostoTotal());
+		Assert.assertTrue(miPaquete.getCostoTotal() == (double) 6650);
 		
 	}
+	
+	@Test
+	public void calcularCostoDePaqueteConPromocionesVencidasDebeExcluirLosDescuentosQueNoAplica(){
+
+		InicialidazorDeTests miInicializador = new InicialidazorDeTests();
+		Paquete miPaquete = miInicializador.getPaquete();
+		
+		miPaquete.comprarEntrada(miInicializador.vectorDeAtracciones[0]);
+		miPaquete.comprarEntrada(miInicializador.vectorDeAtracciones[0]);
+		miPaquete.comprarEntrada(miInicializador.vectorDeAtracciones[0]);
+		miPaquete.comprarEntrada(miInicializador.vectorDeAtracciones[1]);
+		miPaquete.comprarEntrada(miInicializador.vectorDeAtracciones[1]);
+		miPaquete.comprarEntrada(miInicializador.vectorDeAtracciones[2]);
+		miPaquete.comprarEntrada(miInicializador.vectorDeAtracciones[2]);
+		miPaquete.comprarEntrada(miInicializador.vectorDeAtracciones[2]);
+		miPaquete.comprarEntrada(miInicializador.vectorDeAtracciones[2]);
+		miPaquete.comprarEntrada(miInicializador.vectorDeAtracciones[2]);
+		miPaquete.comprarEntrada(miInicializador.vectorDeAtracciones[2]);
+		miPaquete.comprarEntrada(miInicializador.vectorDeAtracciones[4]);
+		miPaquete.comprarEntrada(miInicializador.vectorDeAtracciones[4]);
+		miPaquete.comprarEntrada(miInicializador.vectorDeAtracciones[5]);
+		miPaquete.comprarEntrada(miInicializador.vectorDeAtracciones[5]);
+		
+		miPaquete.calcularCostoTotalDelPaquete(miPaquete.getListaDeAtraccionesContratadas(), miPaquete.getCantidadDeEntradas());
+				
+		//Corrobora que el costo total del paquete sin promociones sea el esperado
+		Assert.assertTrue(miPaquete.getCostoTotal() == (double) 13300);
+		
+		//Remuevo la Promocion Extranjero para que no aplique
+		miPaquete.getListaDePromocionesDisponibles().remove(4);
+		
+		//Fuerzo a vencer el periodo de vigencia para Promocion Absoluta
+		miPaquete.getListaDePromocionesDisponibles().get(1).setPeriodoDeVigenciaEnDias(0);
+		//Fuerzo a vencer el periodo de vigencia para Promocion Familiar
+		miPaquete.getListaDePromocionesDisponibles().get(3).setPeriodoDeVigenciaEnDias(0);
+
+		
+		/* Para el itinerario esperado y los paquetes asignados el precio total deberia dar:
+		 * 
+		 * Costo total inicial = 13300
+		 * Descuento por promocion porcentual = 13300 * 10% = 1330
+		 * Descuento por promocion AxB, la mas barata es Mordor 450, se compraron 2 entradas = 900
+		 * Costo total Final = 13300 - (1330 + 900) = 11070
+		 */
+		
+		miPaquete.ajustarCostoEnBaseAPromociones();
+		
+		//Corrobora que la promocion Familiar se aplique correctamente
+		Assert.assertTrue(miPaquete.getCostoTotal() == (double) 11070);
+		
+	}
+	
+	
 	
 }

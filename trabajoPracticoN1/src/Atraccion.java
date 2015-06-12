@@ -6,7 +6,7 @@ public class Atraccion{
 	private double costo;
 	private int cupoDeIntegrantesDiarios;
 	private int tiempoNecesarioParaVisita;
-	private String tipo;
+	private TipoDeAtraccion tipo;
 	
 	public Atraccion(){}
 	
@@ -42,10 +42,10 @@ public class Atraccion{
 	public void setTiempoNecesarioParaVisita(int tiempoNecesarioParaVisita) {
 		this.tiempoNecesarioParaVisita = tiempoNecesarioParaVisita;
 	}
-	public String getTipo() {
+	public TipoDeAtraccion getTipo() {
 		return tipo;
 	}
-	public void setTipo(String tipoAtraccion) {
+	public void setTipo(TipoDeAtraccion tipoAtraccion) {
 		this.tipo = tipoAtraccion;
 	}
 		
