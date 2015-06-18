@@ -1,11 +1,3 @@
-Pendientes:
-
- - Actualizar toda la documentación y arreglar los diagramas
-	-- Se actualizo el diagrama de clases, se estan actualizando los diagramas de secuencia
-
- - Los diagramas de secuencia siguen estando mal pues no representan el código
-
-
 Corregidos:
  - Falta el link a travis en el readme del repo
 	-- Se agrego el link
@@ -29,3 +21,6 @@ Corregidos:
 	-- El nuevo diseño de promociones deberia restar impacto en los cambios
 - La forma en que está modelado el Paquete sigue sin cerrar pues permite aplicar diversas promociones lo cual modifica el costo y no se sabe finalmente que promociones se están aplicando. 
 	-- Usando refactor se renombraron los metodos de calculo de costo para clarificar el modelo de esta clase
+ - Actualizar toda la documentación y arreglar los diagramas
+	-- Se actualizo el diagrama de clases
+	-- Se actualizaron los diagramas de secuencia
