@@ -72,20 +72,16 @@ public class Paquete {
 		double costoTotalTemporal = costoTotal;
 		double descuento=0;
 
-		//Recorre todas las promociones disponibles si esta promocion 
 		for (Promocion promocion : this.listaDePromocionesDisponibles){
 
 			if (promocion.getClass().equals(PromocionExtranjero.class) && promocion.getPeriodoDeVigenciaEnDias()>0){
 
 				descuento = promocion.calcularDescuento(this);
 
-				if (costoTotal == descuento*2){
-
-
 					costoTotalTemporal -= descuento;
 					aplicaPromocionExtranjero=true;
 
-				}
+			
 
 			}
 
